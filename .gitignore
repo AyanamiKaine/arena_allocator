@@ -1,0 +1,47 @@
+# Build directories
+build/
+build-*
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Object files
+*.o
+*.obj
+*.a
+*.lib
+
+# Precompiled headers
+*.pch
+*.gch
+
+# Dependency files
+*.d
+
+# CMake-specific files
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+
+# IDE-specific files
+.vscode/
+.idea/
+*.xcodeproj
+*.xcworkspace
+*.sln
+*.suo
+*.user
+*.aps
+
+# Other generated files
+tags
+cscope.*
+*.log
+*.tmp
+*~
+
+# Local configuration
+local.conf
+local_settings.py
