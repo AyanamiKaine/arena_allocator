@@ -57,65 +57,6 @@ arena_reset(&particleArena); // Reset for next frame
 arena_free(&particleArena);
 ```
 
-## Advanced Features
-
-- **Automatic Growth:** If you try to allocate more memory than is available, the arena will automatically try to grow (doubling its size).
-- **Alignment:** Control memory alignment for performance optimization or specific hardware requirements.
-- **Statistics:** Get information about arena usage with the `arena_used`, `arena_available`, `arena_utilization`, and `arena_print_stats` functions.
-
-## Why Use an Arena Allocator?
-
-- **Performance:** Avoids the overhead of frequent `malloc` and `free` calls, especially beneficial for short-lived objects.
-- **Fragmentation Reduction:** Prevents memory fragmentation caused by scattered allocations and deallocations.
-- **Lifetime Management:** Simplify memory management by collectively deallocating objects with similar lifetimes.
-- **Deterministic Behavior:** Arena allocators offer predictable memory usage patterns, helpful for real-time systems or embedded environments.
-
-### Use Cases
-
-- **Game Development:** Manage game entities, particle systems, temporary buffers, and more.
-- **Embedded Systems:** Deal with limited memory resources and strict real-time constraints.
-- **High-Performance Computing:** Optimize memory allocation in computationally intensive tasks.
-- **Any Application with Frequent, Short-Lived Allocations:** Arenas excel in scenarios where you create and destroy many small objects within a defined scope.
-
-Absolutely! Here's the completed README section, incorporating all the remaining functions with illustrative examples:
-
-## Using the Arena Allocator
-
-### Include the Header
-
-Start by including the `arena.h` header file in your project:
-
-```c
-#include "arena.h"
-```
-
-### Basic Usage
-
-1. **Initialization:** Create a new arena with a desired initial size (in bytes):
-
-   ```c
-   Arena* myArena = arena_new(1024);  // Create a 1024-byte arena
-   ```
-
-2. **Allocation:** Allocate memory from the arena, specifying the desired size and optional alignment:
-
-   ```c
-   int* data = (int*)arena_allocate(myArena, 100, 4);  // Allocate 100 bytes, aligned to 4-byte boundary
-   ```
-
-   You can allocate any type of data (structs, arrays, etc.) by casting the returned `void*` pointer.
-
-3. **Resetting:** Reset the arena to reuse the allocated memory:
-
-   ```c
-   arena_reset(myArena);
-   ```
-
-4. **Freeing:** When you're done with the arena, free its memory:
-   ```c
-   arena_free(myArena);
-   ```
-
 ### Additional Functions
 
 - **`arena_grow(Arena* arena, size_t additional_size)`:**
@@ -163,3 +104,25 @@ Start by including the `arena.h` header file in your project:
     ```c
     arena_print_stats(myArena);
     ```
+
+## Advanced Features
+
+- **Automatic Growth:** If you try to allocate more memory than is available, the arena will automatically try to grow (doubling its size).
+- **Alignment:** Control memory alignment for performance optimization or specific hardware requirements.
+- **Statistics:** Get information about arena usage with the `arena_used`, `arena_available`, `arena_utilization`, and `arena_print_stats` functions.
+
+## Why Use an Arena Allocator?
+
+- **Performance:** Avoids the overhead of frequent `malloc` and `free` calls, especially beneficial for short-lived objects.
+- **Fragmentation Reduction:** Prevents memory fragmentation caused by scattered allocations and deallocations.
+- **Lifetime Management:** Simplify memory management by collectively deallocating objects with similar lifetimes.
+- **Deterministic Behavior:** Arena allocators offer predictable memory usage patterns, helpful for real-time systems or embedded environments.
+
+### Use Cases
+
+- **Game Development:** Manage game entities, particle systems, temporary buffers, and more.
+- **Embedded Systems:** Deal with limited memory resources and strict real-time constraints.
+- **High-Performance Computing:** Optimize memory allocation in computationally intensive tasks.
+- **Any Application with Frequent, Short-Lived Allocations:** Arenas excel in scenarios where you create and destroy many small objects within a defined scope.
+
+Absolutely! Here's the completed README section, incorporating all the remaining functions with illustrative examples:
