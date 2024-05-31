@@ -107,7 +107,7 @@ arena_free(&particleArena);
 
 ## Advanced Features
 
-- **Automatic Growth:** If you try to allocate more memory than is available, the arena will automatically try to grow (doubling its size).
+- **Automatic Growth:** If you try to allocate more memory than is available, the arena will automatically try to grow either by the needed size to allocate the object or doubling its size (set if_size_too_small_double_in_size to true).
 - **Alignment:** Control memory alignment for performance optimization or specific hardware requirements.
 - **Statistics:** Get information about arena usage with the `arena_used`, `arena_available`, `arena_utilization`, and `arena_print_stats` functions.
 

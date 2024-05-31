@@ -2,7 +2,7 @@
 #define ARENA_H
 
 #include <stddef.h>  // for size_t
-
+#include <stdbool.h>
 /**
  * ArenaError: Represents the possible error states that can occur during operations within the Arena memory allocator.
  */
@@ -35,6 +35,9 @@ typedef struct Arena {
     char* start;        // Start of the arena memory
     char* current;      // Current allocation position
     size_t size;        // Total size of the arena
+    // If set to true, then if the allocate in the 
+    //arena and it must grow it will grow by arena->size * 2 + sizeof(OBJECT_TO_BE_ALLOCATED)
+    bool if_size_too_small_double_in_size; 
 } Arena;
 
 /**
@@ -61,7 +64,7 @@ typedef struct Arena {
  *     // Handle allocation failure...
  * }
  */
-Arena* arena_new(size_t initial_size);
+Arena* arena_new(size_t initial_size, bool if_size_too_small_double_in_size);
 
 /**
  * @brief Allocate aligned memory of the given size from the arena.
@@ -80,8 +83,8 @@ Arena* arena_new(size_t initial_size);
  * @note
  * - The allocated memory block is automatically initialized to zero.
  * - If the requested alignment is 1, no alignment adjustment is performed for efficiency.
- * - The arena may be automatically resized if there is insufficient space to fulfill the request. In 
- * this case the new arenas size will be = arena->size * 2 + alignment
+ * - The arena may be automatically resized if there is insufficient space to fulfill the request.
+ * How much the arena resizes is based on the if_size_too_small_double_in_size flag.
  *
  * @example
  * Arena myArena;

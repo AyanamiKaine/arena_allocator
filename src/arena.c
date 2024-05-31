@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 
-Arena* arena_new(size_t initial_size) {
+Arena* arena_new(size_t initial_size, bool if_size_too_small_double_in_size) {
     Arena* arena = malloc(sizeof(Arena));
     if (!arena) { return NULL; }
 
@@ -16,6 +16,7 @@ Arena* arena_new(size_t initial_size) {
 
     arena->current = arena->start;
     arena->size = initial_size;
+    arena->if_size_too_small_double_in_size = if_size_too_small_double_in_size;
     return arena;
 }
 
@@ -46,9 +47,18 @@ void* arena_allocate(Arena* arena, size_t size, size_t alignment) {
 
     // Try to grow if not enough space
     if (arena->current + adjustment + size > arena->start + arena->size) {
-        if (!arena_grow(arena, arena->size * 2 + adjustment)) { 
-            return NULL; // Growth failed
+        
+        if(arena->if_size_too_small_double_in_size == true){
+            if (!arena_grow(arena, arena->size * 2 + adjustment)) { 
+                return NULL; // Growth failed
+            } 
         }
+        else {
+            if (!arena_grow(arena, arena->size + adjustment)) { 
+                return NULL; // Growth failed
+            }
+        }
+
     }
 
     void* ptr = arena->current + adjustment;
