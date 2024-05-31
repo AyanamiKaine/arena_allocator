@@ -124,5 +124,3 @@ arena_free(&particleArena);
 - **Embedded Systems:** Deal with limited memory resources and strict real-time constraints.
 - **High-Performance Computing:** Optimize memory allocation in computationally intensive tasks.
 - **Any Application with Frequent, Short-Lived Allocations:** Arenas excel in scenarios where you create and destroy many small objects within a defined scope.
-
-Absolutely! Here's the completed README section, incorporating all the remaining functions with illustrative examples:
