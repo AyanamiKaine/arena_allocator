@@ -2,7 +2,7 @@
 #define ARENA_H
 
 #include <stddef.h>  // for size_t
-#include <stdbool.h>
+#include <stdbool.h> // for bool
 /**
  * ArenaError: Represents the possible error states that can occur during operations within the Arena memory allocator.
  */
@@ -22,10 +22,10 @@ typedef enum {
  * better approach then to use malloc and free for every object you create. Think about the collective 
  * lifetime of objects and allocate objects with the same or similar life time in an arena.
  *
- * @field start   A pointer to the beginning of the arena's memory block.
- * @field current A pointer to the current allocation position within the memory block.
- * @field size    The total size (in bytes) of the arena's memory block.
- *
+ * @param start   A pointer to the beginning of the arena's memory block.
+ * @param current A pointer to the current allocation position within the memory block.
+ * @param size    The total size (in bytes) of the arena's memory block.
+ * @param if_size_too_small_double_in_size   Flag if set to true then the arena if it tries to automatically grow will double in size
  * @note
  * - The `current` pointer keeps track of the next available byte for allocation.
  * - When the `current` pointer reaches the end of the memory block (i.e., `current == start + size`),
